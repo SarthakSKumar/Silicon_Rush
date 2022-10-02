@@ -13,16 +13,16 @@
 #include <addons/RTDBHelper.h>
 
 /* 1. Define the WiFi credentials */
-#define WIFI_SSID "hello"
-#define WIFI_PASSWORD "helloworld1"
+#define WIFI_SSID "*********************"
+#define WIFI_PASSWORD "*********************"
 
 //For the following credentials, see examples/Authentications/SignInAsUser/EmailPassword/EmailPassword.ino
 
 /* 2. Define the API Key */
-#define API_KEY "MMK4mXNJRvB7smpsY1LBAJOnhY5HnaZLfCbzN1cd"
+#define API_KEY "*********************"
 
 /* 3. Define the RTDB URL */
-#define DATABASE_URL "https://shakthi-f143a-default-rtdb.firebaseio.com/" //<databaseName>.firebaseio.com or <databaseName>.<region>.firebasedatabase.app
+#define DATABASE_URL "*********************" //<databaseName>.firebaseio.com or <databaseName>.<region>.firebasedatabase.app
 
 
 //Define Firebase Data object
@@ -80,20 +80,20 @@ void loop()
 {
  
   
-    x=random(0,9);
-    y=random(10,19);
+    x=random(200,220);
+    y=random(1,2);
     
   if (Firebase.ready()) 
   {
     
     //Firebase.setInt(fbdo, main, 5);
-    Firebase.setInt(fbdo, "/ESP101/a", x);
-    Firebase.setInt(fbdo, "/ESP101/b", y);
+    Firebase.setInt(fbdo, "/ESP101/voltage", x);
+    Firebase.setInt(fbdo, "/ESP101/current", y);
     delay(200);
 
-    Serial.printf("Get int a--  %s\n", Firebase.getInt(fbdo, "/ESP101/a") ? String(fbdo.to<int>()).c_str() : fbdo.errorReason().c_str());
+    Serial.printf("Get int a--  %s\n", Firebase.getInt(fbdo, "/ESP101/voltage") ? String(fbdo.to<int>()).c_str() : fbdo.errorReason().c_str());
      a=fbdo.to<int>();
-    Serial.printf("Get int b--  %s\n", Firebase.getInt(fbdo, "/ESP101/b") ? String(fbdo.to<int>()).c_str() : fbdo.errorReason().c_str());
+    Serial.printf("Get int b--  %s\n", Firebase.getInt(fbdo, "/ESP101/current") ? String(fbdo.to<int>()).c_str() : fbdo.errorReason().c_str());
      b=fbdo.to<int>();
 
   Serial.println();  
