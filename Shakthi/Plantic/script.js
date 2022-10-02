@@ -15,11 +15,17 @@ firebase.initializeApp(firebaseConfig);
 
 $(document).ready(function(){
     var database = firebase.database();
-	var Led1Status;
+	var Motor1Status;
+	var ref = firebase.database().ref();
+	ref.on("value", function(snapshot) {
+		console.log(snapshot.val());
+	 }, function (error) {
+		console.log("Error: " + error.code);
+	 });
 
 	database.ref().on("value", function(snap){
-		Led1Status = snap.val().Led1Status;
-		if(Led1Status == "1"){    // check from the firebase
+		Motor1Status = snap.val().Motor1Status;
+		if(Motor1Status == "1"){    // check from the firebase
 			//$(".Light1Status").text("The light is off");
 			document.getElementById("unact").style.display = "none";
 			document.getElementById("act").style.display = "block";
@@ -31,14 +37,14 @@ $(document).ready(function(){
 	});
 
     $(".toggle-btn").click(function(){
-		var firebaseRef = firebase.database().ref().child("Led1Status");
+		var firebaseRef = firebase.database().ref().child("Motor1Status");
 
-		if(Led1Status == "1"){    // post to firebase
+		if(Motor1Status == "1"){    // post to firebase
 			firebaseRef.set("0");
-			Led1Status = "0";
+			Motor1Status = "0";
 		} else {
 			firebaseRef.set("1");
-			Led1Status = "1";
+			Motor1Status = "1";
 		}
 	})
 });
